@@ -10,8 +10,8 @@ namespace OrderBook.Infrastructure.Services.Abstractions
 {
     public interface IBinanceService
     {
-        Task<Result<BinanceOrderBook>> GetOrderBookAsync();
+        Task<Result<BinanceOrderBook>> GetOrderBookAsync(CancellationToken cancellationToken);
 
-        Task<Result<AverageMarketPrice>> GetAverageMarketPriceAsync();
+        Task<Result<AverageMarketPrice>> GetAverageMarketPriceAsync(CancellationToken cancellationToken);
     }
 }

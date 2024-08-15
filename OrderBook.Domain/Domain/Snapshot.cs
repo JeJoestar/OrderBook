@@ -8,5 +8,10 @@ namespace OrderBook.Domain.Domain
 {
     public class Snapshot
     {
+        public int Id { get; set; }
+
+        public string SnapshotJson { get; set; } = null!;
+
+        public DateTimeOffset RetrievedAt { get; set; }
     }
 }

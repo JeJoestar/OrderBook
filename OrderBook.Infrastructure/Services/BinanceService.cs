@@ -21,9 +21,11 @@ namespace OrderBook.Infrastructure.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<Result<AverageMarketPrice>> GetAverageMarketPriceAsync()
+        public async Task<Result<AverageMarketPrice>> GetAverageMarketPriceAsync(CancellationToken cancellationToken)
         {
-            var result = await SendRequest<AverageMarketPrice>(_options.BinanceApiBaseUrl + AveragePriceUrl);
+            var result = await SendRequestAsync<AverageMarketPrice>(
+                _options.BinanceApiBaseUrl + AveragePriceUrl,
+                cancellationToken);
 
             if (result.IsFailure)
             {
@@ -33,9 +35,11 @@ namespace OrderBook.Infrastructure.Services
             return Result.Success(result.Value ?? new AverageMarketPrice());
         }
 
-        public async Task<Result<BinanceOrderBook>> GetOrderBookAsync()
+        public async Task<Result<BinanceOrderBook>> GetOrderBookAsync(CancellationToken cancellationToken)
         {
-            var result = await SendRequest<BinanceOrderBook>(_options.BinanceApiBaseUrl + DepthChartUrl);
+            var result = await SendRequestAsync<BinanceOrderBook>(
+                _options.BinanceApiBaseUrl + DepthChartUrl,
+                cancellationToken);
 
             if (result.IsFailure)
             {
@@ -45,14 +49,14 @@ namespace OrderBook.Infrastructure.Services
             return Result.Success(result.Value ?? new BinanceOrderBook());
         }
 
-        private async Task<Result<TResponse?>> SendRequest<TResponse>(string url)
+        private async Task<Result<TResponse?>> SendRequestAsync<TResponse>(string url, CancellationToken cancellationToken)
         {
             HttpClient client = _httpClientFactory.CreateClient();
-            HttpResponseMessage response = await client.GetAsync(url);
+            HttpResponseMessage response = await client.GetAsync(url, cancellationToken);
 
             if (response.IsSuccessStatusCode)
             {
-                string responseBody = await response.Content.ReadAsStringAsync();
+                string responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
                 return Result.Success(JsonConvert.DeserializeObject<TResponse>(responseBody));
             }
 
