@@ -49,7 +49,7 @@ namespace OrderBook.Infrastructure.Services
             return Result.Success(result.Value ?? new BinanceOrderBook());
         }
 
-        private async Task<Result<TResponse?>> SendRequestAsync<TResponse>(string url, CancellationToken cancellationToken)
+        public async Task<Result<TResponse?>> SendRequestAsync<TResponse>(string url, CancellationToken cancellationToken)
         {
             HttpClient client = _httpClientFactory.CreateClient();
             HttpResponseMessage response = await client.GetAsync(url, cancellationToken);

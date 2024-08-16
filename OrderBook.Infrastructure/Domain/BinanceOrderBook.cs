@@ -14,5 +14,33 @@ namespace OrderBook.Infrastructure.Domain
         [JsonProperty("asks")]
         public List<string[]> Asks { get; set; } = [];
 
+        public override bool Equals(object? obj)
+        {
+            var book = obj as BinanceOrderBook;
+
+            if (book is null)
+            {
+                return false;
+            }
+
+            if (book.Bids.Count != Bids.Count)
+            {
+                return false;
+            }
+
+            if (book.Asks.Count != Asks.Count)
+            {
+                return false;
+            }
+
+
+            if (book.LastUpdateId != LastUpdateId)
+            {
+                return false;
+            }
+
+            return !book.Bids.Where((t, i) => !t.Equals(Bids[i])).Any()
+                && !book.Asks.Where((t, i) => !t.Equals(Asks[i])).Any();
+        }
     }
 }
