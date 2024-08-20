@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using OrderBook.Domain.Domain;
 using OrderBook.Infrastructure.Context;
 using OrderBook.Infrastructure.Domain;
@@ -13,6 +14,16 @@ namespace OrderBook.Infrastructure.Services
         public SnapshotService(IDataContext dbContext)
         {
             _context = dbContext;
+        }
+
+        public async Task<Snapshot?> GetOrderBookSnapshotByDate(DateTime key)
+        {
+            return await _context.Snapshots.FirstOrDefaultAsync(x => x.RetrievedAt == key);
+        }
+
+        public async Task<List<DateTimeOffset>> GetAvailableSnapshotsKeysAsync()
+        {
+            return await _context.Snapshots.Select(s => s.RetrievedAt).ToListAsync();
         }
 
         public async Task CreateSnapshotAsync(BinanceOrderBook orderBook, CancellationToken cancellationToken)

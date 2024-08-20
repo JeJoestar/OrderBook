@@ -1,3 +1,4 @@
+using OrderBook.Infrastructure.Hubs;
 using OrderBook.WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,12 +17,8 @@ var app = builder.Build();
 
 await app.RunMigrations();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors(options => options
     .AllowAnyMethod()
@@ -34,5 +31,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<TradeHub>("/tradehub");
 
 app.Run();

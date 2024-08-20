@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using OrderBook.Infrastructure.Dto;
 
 namespace OrderBook.Infrastructure.Domain
 {

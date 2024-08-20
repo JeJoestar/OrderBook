@@ -11,7 +11,6 @@ namespace OrderBook.WebAPI.Extensions
     {
         public static void ConfigureOptions(this WebApplicationBuilder builder)
         {
-            builder.Services.Configure<BinanceApiOptions>(builder.Configuration.GetSection(nameof(BinanceApiOptions)));
             builder.Services.Configure<ConnectionOptions>(builder.Configuration.GetSection(nameof(ConnectionOptions)));
         }
 
@@ -19,7 +18,7 @@ namespace OrderBook.WebAPI.Extensions
         {
             builder.Services.AddMediatR(c =>
             {
-                c.RegisterServicesFromAssembly(typeof(GetCurrentOrderBookQuery).Assembly);
+                c.RegisterServicesFromAssembly(typeof(GetOrderBookSnapshotByDateQuery).Assembly);
             });
 
             builder.Services.AddEndpointsApiExplorer();
@@ -27,12 +26,12 @@ namespace OrderBook.WebAPI.Extensions
 
         public static void ConfigureInAppServices(this WebApplicationBuilder builder)
         {
-            builder.Services.AddSingleton<IBinanceApiOptions>(sp => sp.GetRequiredService<IOptions<BinanceApiOptions>>().Value);
             builder.Services.AddSingleton<IConnectionOptions>(sp => sp.GetRequiredService<IOptions<ConnectionOptions>>().Value);
-            builder.Services.AddTransient<IBinanceService, BinanceService>();
             builder.Services.AddTransient<ISnapshotService, SnapshotService>();
-            builder.Services.AddScoped<IDataContext, ApplicationDbContext>();
+            builder.Services.AddTransient<IDataContext, ApplicationDbContext>();
+            builder.Services.AddHostedService<BinanceWebSocketService>();
             builder.Services.AddHttpClient();
+            builder.Services.AddSignalR();
         }
     }
 }
