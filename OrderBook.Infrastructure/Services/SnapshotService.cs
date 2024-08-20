@@ -16,15 +16,11 @@ namespace OrderBook.Infrastructure.Services
             _context = dbContext;
         }
 
-        public async Task<Snapshot?> GetOrderBookSnapshotByDate(DateTime key)
-        {
-            return await _context.Snapshots.FirstOrDefaultAsync(x => x.RetrievedAt == key);
-        }
+        public Task<Snapshot?> GetOrderBookSnapshotByDateAsync(DateTime key)
+            => _context.Snapshots.FirstOrDefaultAsync(x => x.RetrievedAt == key);
 
-        public async Task<List<DateTimeOffset>> GetAvailableSnapshotsKeysAsync()
-        {
-            return await _context.Snapshots.Select(s => s.RetrievedAt).ToListAsync();
-        }
+        public Task<List<DateTimeOffset>> GetAvailableSnapshotsKeysAsync()
+            => _context.Snapshots.Select(s => s.RetrievedAt).ToListAsync();
 
         public async Task CreateSnapshotAsync(BinanceOrderBook orderBook, CancellationToken cancellationToken)
         {

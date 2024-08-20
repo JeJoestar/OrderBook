@@ -5,7 +5,8 @@ namespace OrderBook.Infrastructure.Services.Abstractions
 {
     public interface ISnapshotService
     {
-        Task<Snapshot?> GetOrderBookSnapshotByDate(DateTime key);
+
+        Task<Snapshot?> GetOrderBookSnapshotByDateAsync(DateTime key);
 
         Task<List<DateTimeOffset>> GetAvailableSnapshotsKeysAsync();
 
