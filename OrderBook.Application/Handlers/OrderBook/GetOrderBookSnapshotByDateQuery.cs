@@ -23,7 +23,7 @@ namespace OrderBook.Application.Handlers.OrderBook
 
             public async Task<Result<OrderBookDto>> Handle(GetOrderBookSnapshotByDateQuery request, CancellationToken cancellationToken)
             {
-                var snapshot = _snapshotService.GetOrderBookSnapshotByDate(request.Key);
+                var snapshot = await _snapshotService.GetOrderBookSnapshotByDateAsync(request.Key);
 
                 if (snapshot is null)
                 {
