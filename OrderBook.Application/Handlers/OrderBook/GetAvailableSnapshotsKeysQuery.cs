@@ -17,7 +17,7 @@ namespace OrderBook.Application.Handlers.OrderBook
 
             public async Task<Result<List<DateTimeOffset>>> Handle(GetAvailableSnapshotsKeysQuery request, CancellationToken cancellationToken)
             {
-                var keys = await _snapshotService.GetAvailableSnapshotsKeysAsync();
+                var keys = _snapshotService.GetAvailableSnapshotsKeys();
 
                 return Result.Success(keys);
             }

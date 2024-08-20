@@ -5,9 +5,9 @@ namespace OrderBook.Infrastructure.Services.Abstractions
 {
     public interface ISnapshotService
     {
-        Task<Snapshot?> GetOrderBookSnapshotByDate(DateTime key);
+        Snapshot? GetOrderBookSnapshotByDate(DateTime key);
 
-        Task<List<DateTimeOffset>> GetAvailableSnapshotsKeysAsync();
+        List<DateTimeOffset> GetAvailableSnapshotsKeys();
 
         Task CreateSnapshotAsync(BinanceOrderBook orderBook, CancellationToken cancellationToken);
     }
