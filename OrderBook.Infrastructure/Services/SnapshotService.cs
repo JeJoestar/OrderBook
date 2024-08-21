@@ -22,11 +22,11 @@ namespace OrderBook.Infrastructure.Services
         public Task<List<DateTimeOffset>> GetAvailableSnapshotsKeysAsync()
             => _context.Snapshots.Select(s => s.RetrievedAt).ToListAsync();
 
-        public async Task CreateSnapshotAsync(BinanceOrderBook orderBook, CancellationToken cancellationToken)
+        public async Task CreateSnapshotAsync(BinanceOrderBook orderBook, DateTimeOffset retrievedAt, CancellationToken cancellationToken)
         {
             var entityToInsert = new Snapshot
             {
-                RetrievedAt = DateTime.UtcNow,
+                RetrievedAt = retrievedAt,
                 SnapshotJson = JsonConvert.SerializeObject(orderBook),
             };
 

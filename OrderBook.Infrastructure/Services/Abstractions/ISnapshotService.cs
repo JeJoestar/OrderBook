@@ -10,6 +10,6 @@ namespace OrderBook.Infrastructure.Services.Abstractions
 
         Task<List<DateTimeOffset>> GetAvailableSnapshotsKeysAsync();
 
-        Task CreateSnapshotAsync(BinanceOrderBook orderBook, CancellationToken cancellationToken);
+        Task CreateSnapshotAsync(BinanceOrderBook orderBook, DateTimeOffset retrievedAt, CancellationToken cancellationToken);
     }
 }

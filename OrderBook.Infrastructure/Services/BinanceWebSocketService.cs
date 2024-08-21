@@ -35,8 +35,10 @@ namespace OrderBook.Infrastructure.Services
                         return;
                     }
 
-                    await _snapshotService.CreateSnapshotAsync(deserializedData, cancellationToken);
-                    await _hubContext.Clients.All.SendTradeUpdate(deserializedData.ToDto());
+                    DateTimeOffset retrievedAt = DateTimeOffset.UtcNow;
+
+                    await _snapshotService.CreateSnapshotAsync(deserializedData, retrievedAt, cancellationToken);
+                    await _hubContext.Clients.All.SendTradeUpdate(deserializedData.ToDto(retrievedAt));
                 }, cancellationToken);
 
             await _webSocket.ConnectAsync(cancellationToken);

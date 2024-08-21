@@ -37,7 +37,7 @@ namespace OrderBook.Application.Handlers.OrderBook
                     return Result.Failure<OrderBookDto>("Failed to read a snapshot returned from database");
                 }
 
-                return Result.Success(binanceOrderBook.ToDto());
+                return Result.Success(binanceOrderBook.ToDto(snapshot.RetrievedAt));
             }
         }
     }
