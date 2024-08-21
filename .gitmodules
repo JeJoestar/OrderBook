@@ -1,0 +1,3 @@
+[submodule "order-book-ui"]
+	path = order-book
+	url = https://github.com/JeJoestar/order-book.git
