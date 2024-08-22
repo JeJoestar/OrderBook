@@ -31,7 +31,7 @@ namespace OrderBook.Tests.Infrastructure.Services
             var cancellationToken = CancellationToken.None;
 
             // Act
-            await _snapshotService.CreateSnapshotAsync(orderBook, cancellationToken);
+            await _snapshotService.CreateSnapshotAsync(orderBook, DateTimeOffset.UtcNow, cancellationToken);
 
             // Assert
             mockDbSet.Verify(m => m.AddAsync(It.Is<Snapshot>(s =>
@@ -52,7 +52,7 @@ namespace OrderBook.Tests.Infrastructure.Services
             var cancellationToken = CancellationToken.None;
 
             // Act
-            await _snapshotService.CreateSnapshotAsync(orderBook, cancellationToken);
+            await _snapshotService.CreateSnapshotAsync(orderBook, DateTimeOffset.UtcNow, cancellationToken);
 
             // Assert
             _mockContext.Verify(m => m.SaveChangesAsync(cancellationToken), Times.Once);

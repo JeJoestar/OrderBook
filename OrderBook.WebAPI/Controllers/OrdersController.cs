@@ -34,10 +34,10 @@ namespace OrderBook.WebAPI.Controllers
         }
 
         [HttpGet("date-keys")]
-        [ProducesResponseType(typeof(PagedList<DateTimeOffset, DateTimeOffset>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedList<DateTimeOffset, DateTimeOffset?>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAvailabeSnapshotsKeys([FromQuery] int pageSize, [FromQuery] DateTimeOffset? pageNumber = null)
         {
-            Result<PagedList<DateTimeOffset, DateTimeOffset>> result = await _mediator.Send(new GetAvailableSnapshotsKeysQuery()
+            Result<PagedList<DateTimeOffset, DateTimeOffset?>> result = await _mediator.Send(new GetAvailableSnapshotsKeysQuery()
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,

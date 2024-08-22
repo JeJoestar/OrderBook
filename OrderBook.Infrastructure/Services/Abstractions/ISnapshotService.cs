@@ -8,7 +8,7 @@ namespace OrderBook.Infrastructure.Services.Abstractions
 
         Task<Snapshot?> GetOrderBookSnapshotByDateAsync(DateTime key);
 
-        Task<PagedList<DateTimeOffset, DateTimeOffset>> GetAvailableSnapshotsKeysAsync(int pageSize, DateTimeOffset? pageNumber);
+        Task<PagedList<DateTimeOffset, DateTimeOffset?>> GetAvailableSnapshotsKeysAsync(int pageSize, DateTimeOffset? pageNumber);
 
         Task CreateSnapshotAsync(BinanceOrderBook orderBook, DateTimeOffset retrievedAt, CancellationToken cancellationToken);
     }

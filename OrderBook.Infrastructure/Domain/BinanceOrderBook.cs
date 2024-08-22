@@ -43,5 +43,10 @@ namespace OrderBook.Infrastructure.Domain
             return !book.Bids.Where((t, i) => !t.Equals(Bids[i])).Any()
                 && !book.Asks.Where((t, i) => !t.Equals(Asks[i])).Any();
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(LastUpdateId, Bids, Asks);
+        }
     }
 }
