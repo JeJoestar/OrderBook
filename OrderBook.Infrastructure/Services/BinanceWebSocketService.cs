@@ -49,9 +49,7 @@ namespace OrderBook.Infrastructure.Services
             await _webSocket.DisconnectAsync(cancellationToken);
         }
 
-        private BinanceOrderBook? DeserializeData(string json)
-        {
-            return JsonConvert.DeserializeObject<BinanceOrderBook>(json);
-        }
+        private static BinanceOrderBook? DeserializeData(string json)
+            => JsonConvert.DeserializeObject<BinanceOrderBook>(json);
     }
 }

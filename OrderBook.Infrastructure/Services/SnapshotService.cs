@@ -19,8 +19,17 @@ namespace OrderBook.Infrastructure.Services
         public Task<Snapshot?> GetOrderBookSnapshotByDateAsync(DateTime key)
             => _context.Snapshots.FirstOrDefaultAsync(x => x.RetrievedAt == key);
 
-        public Task<List<DateTimeOffset>> GetAvailableSnapshotsKeysAsync()
-            => _context.Snapshots.Select(s => s.RetrievedAt).ToListAsync();
+        public async Task<PagedList<DateTimeOffset, DateTimeOffset>> GetAvailableSnapshotsKeysAsync(int pageSize, DateTimeOffset? pageNumber)
+        {
+            var data = await _context.Snapshots
+                .OrderByDescending(x => x.RetrievedAt)
+                .Where(s => s.RetrievedAt < (pageNumber ?? DateTimeOffset.MaxValue))
+                .Take(pageSize + 1)
+                .Select(s => s.RetrievedAt)
+                .ToListAsync();
+
+            return new PagedList<DateTimeOffset, DateTimeOffset>(data, data.Last(), pageSize);
+        }
 
         public async Task CreateSnapshotAsync(BinanceOrderBook orderBook, DateTimeOffset retrievedAt, CancellationToken cancellationToken)
         {

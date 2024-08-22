@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderBook.Application", "Or
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderBook.Infrastructure", "OrderBook.Infrastructure\OrderBook.Infrastructure.csproj", "{F570C82E-A223-4E94-AFDB-EBECDCFD7C6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderBook.Tests", "OrderBook.Tests\OrderBook.Tests.csproj", "{D26F32F2-75E3-4A70-A56F-EC18BCC5480D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderBook.Tests", "OrderBook.Tests\OrderBook.Tests.csproj", "{D26F32F2-75E3-4A70-A56F-EC18BCC5480D}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9BA5B7B3-3BC2-4571-9CD0-D3C441111336}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D26F32F2-75E3-4A70-A56F-EC18BCC5480D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D26F32F2-75E3-4A70-A56F-EC18BCC5480D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D26F32F2-75E3-4A70-A56F-EC18BCC5480D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BA5B7B3-3BC2-4571-9CD0-D3C441111336}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA5B7B3-3BC2-4571-9CD0-D3C441111336}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA5B7B3-3BC2-4571-9CD0-D3C441111336}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA5B7B3-3BC2-4571-9CD0-D3C441111336}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
